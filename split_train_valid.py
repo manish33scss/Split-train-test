@@ -5,16 +5,16 @@ import time
 
 names = []
 label = []
-src= r"L:\valid"
+src= r"L:\valid"  #path of dataset containing images and annotations jpg and txt.
 os.chdir(src)
 
 for root, dirs, files in os.walk(src):
     for filename in files:
         if filename.endswith("jpg"):
             names.append(filename)
-    for filename in files:
-        if filename.endswith("txt"):
-            label.append(filename)
+    #for filename in files:
+     #   if filename.endswith("txt"):
+     #       label.append(filename)
 
 def chkdirec():
     if not os.path.isdir('valid'):
@@ -37,7 +37,7 @@ def copyFiles(clip , path):
 
 random.shuffle(names)
 
-#find 80 percent of lr
+#find 80 percent of lr 80 percent train, 20 percent validation
 
 train_no = int(len(names) * .81)
 training_set = []
@@ -63,33 +63,13 @@ label_train = []
 
 
 for file in valid_set:
-    label_valid.append(file.replace(".jpg" , ".txt"))
+    label_valid.append(file.replace(".jpg" , ".txt")) 
 for file in training_set:
     label_train.append(file.replace(".jpg" , ".txt"))
 
 copyFiles(label_valid, vdata_p)
 copyFiles(label_train, tdata_p)
 
-#for file in valid_set:
-#    label_valid = []
-#    label_valid.append(file.replace(".jpg" , ".txt"))
-
-
-# TEST CODES
-
-#train_data = "Train_set"
-#valid_data = "Valid_set"
-
-#path1 = os.path.join(src, train_data)
-#path2 = os.path.join(src, valid_data)
 
 
 
-#if not os.path.isdir('valid'):
-#    os.mkdir('valid')
-    
-
-#mode = 0o666
-
-#os.mkdir(path1,mode)
-#os.mkdir(path2,mode)
